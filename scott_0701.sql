@@ -355,18 +355,20 @@ INSERT INTO ADDRESS
 VALUES(1,'HGBONG','SEOUL','123-4567','gbhong@naver.com');
 ---    Homework
 -- 문1) address스키마/Data 유지하며     addr_second Table 생성 
-CREATE UNIQUE INDEX addr_second
-ON address(id, name, addr, phone,email);
+CREATE TABLE addr_second(id, name, addr, phone,email)
+AS SELECT * FROM address;
 
 -- 문2) address스키마 유지하며  Data 복제 하지 않고   addr_seven Table 생성
-CREATE INDEX addr_seven
-ON address(addr);
+
+CREATE TABLE addr_second(id, name, addr, phone,email)
+AS SELECT * FROM address
+where '1' = '2';
 
 -- 문3) address(주소록) 테이블에서 id, name 칼럼만 복사하여 addr_third 테이블을 생성하여라
-CREATE INDEX addr_third
-ON address(id,name);
+CREATE table addr_third
+as select id,name from address;
 -- 문4) addr_second 테이블 을 addr_tmp로 이름을 변경 하시요
-ALTER index ADDR_SECOND RENAME TO addr_tmp
+rename ADDR_SECOND TO addr_tmp
 ;
 ------------------------------------------------------------------
 -----     데이터 사전
@@ -407,4 +409,4 @@ FROM all_tables;
 
 -- 3. DBA_   : 데이터베이스 관리자만 접근 가능한 데이터 사전 뷰
 SELECT owner, table_name
-FROM   dba_tables;S
+FROM   dba_tables;
